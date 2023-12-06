@@ -33,12 +33,12 @@ deploy:
     name: alpine/k8s:1.21.5
     entrypoint: ['']
   variables:
-    RELEASE: tuki-api
+    RELEASE: hacktorescue
     NAMESPACE: dev
     TAG: ${CI_COMMIT_SHORT_SHA}
   before_script:
     - kubectl config get-contexts
-    - kubectl config use-context aexol/tuki_backend:tuki-gitlab-agent
+    - kubectl config use-context openspace/hacktotherescue:hackyeah-agnet
   script:
     - cd helm
     - sh ./api.sh
