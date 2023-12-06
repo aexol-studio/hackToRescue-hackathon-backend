@@ -1,0 +1,44 @@
+image: node:16
+
+stages:
+  - build
+  - build-image
+  - deploy
+
+build:
+  stage: build
+  image: node:16
+  script:
+    - echo ${gitlab-ci-token}
+    - npm ci
+    - npm run build
+
+build-image:
+  stage: build-image
+  variables:
+    REGISTRY: registry.gitlab.aexol.com/aexol/backend/hacktotherescue
+    TAG: ${CI_COMMIT_SHORT_SHA}
+  image: docker:20.10.13
+  script:
+    - docker build -t ${REGISTRY}/api:${TAG} .
+    - docker tag ${REGISTRY}/api:${TAG} ${REGISTRY}/api:latest
+    - docker logout
+    - docker login registry.gitlab.aexol.com -u gitlab-ci-token -p $CI_JOB_TOKEN
+    - docker push ${REGISTRY}/api:latest
+    - docker push ${REGISTRY}/api:${TAG}
+
+deploy:
+  stage: deploy
+  image:
+    name: alpine/k8s:1.21.5
+    entrypoint: ['']
+  variables:
+    RELEASE: tuki-api
+    NAMESPACE: dev
+    TAG: ${CI_COMMIT_SHORT_SHA}
+  before_script:
+    - kubectl config get-contexts
+    - kubectl config use-context aexol/tuki_backend:tuki-gitlab-agent
+  script:
+    - cd helm
+    - sh ./api.sh
