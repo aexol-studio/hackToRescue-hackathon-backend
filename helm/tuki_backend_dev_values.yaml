@@ -1,0 +1,20 @@
+# image.tag on command line
+imagePullSecrets:
+  - name: gitlab
+  - name: gitlab-aexol
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-http
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/cors-allow-origin: dev.tuki-backend.com
+  hosts:
+    - host: api.hacktotherescue.aexol.work
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: api.hacktotherescue.aexol.work-tls
+      hosts:
+        - api.hacktotherescue.aexol.work

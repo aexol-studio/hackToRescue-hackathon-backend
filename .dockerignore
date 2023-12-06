@@ -1,0 +1,11 @@
+node_modules
+Dockerfile
+lib
+helm
+.git
+.eslintrc.json
+.gitignore
+.gitlab-ci.yml
+.graphql-editor.json
+.prettierrc
+README.md
