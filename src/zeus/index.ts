@@ -840,25 +840,35 @@ type ZEUS_UNIONS = never
 
 export type ValueTypes = {
     ["Query"]: AliasType<{
-getCityParameters?: [{	city: string | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
+getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
 	getCollectedCities?:boolean | `@${string}`,
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
-addParameters?: [{	base64: string | Variable<any, string>,	city: string | Variable<any, string>},boolean | `@${string}`],
+	refreshStations?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
-	_id?:boolean | `@${string}`,
 	city?:boolean | `@${string}`,
+	stationId?:boolean | `@${string}`,
+	createdAt?:boolean | `@${string}`,
+	updatedAt?:boolean | `@${string}`,
 	parameters?:ValueTypes["Parameters"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
 	pm10?:boolean | `@${string}`,
+	pm10Time?:boolean | `@${string}`,
 	pm25?:boolean | `@${string}`,
+	pm25Time?:boolean | `@${string}`,
+	no2?:boolean | `@${string}`,
+	no2Time?:boolean | `@${string}`,
+	so2?:boolean | `@${string}`,
+	so2Time?:boolean | `@${string}`,
+	o3?:boolean | `@${string}`,
+	o3Time?:boolean | `@${string}`,
 	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>
@@ -866,25 +876,35 @@ addParameters?: [{	base64: string | Variable<any, string>,	city: string | Variab
 
 export type ResolverInputTypes = {
     ["Query"]: AliasType<{
-getCityParameters?: [{	city: string,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
+getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
 	getCollectedCities?:boolean | `@${string}`,
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
-addParameters?: [{	base64: string,	city: string},boolean | `@${string}`],
+	refreshStations?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
-	_id?:boolean | `@${string}`,
 	city?:boolean | `@${string}`,
+	stationId?:boolean | `@${string}`,
+	createdAt?:boolean | `@${string}`,
+	updatedAt?:boolean | `@${string}`,
 	parameters?:ResolverInputTypes["Parameters"],
 		__typename?: boolean | `@${string}`
 }>;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
 	pm10?:boolean | `@${string}`,
+	pm10Time?:boolean | `@${string}`,
 	pm25?:boolean | `@${string}`,
+	pm25Time?:boolean | `@${string}`,
+	no2?:boolean | `@${string}`,
+	no2Time?:boolean | `@${string}`,
+	so2?:boolean | `@${string}`,
+	so2Time?:boolean | `@${string}`,
+	o3?:boolean | `@${string}`,
+	o3Time?:boolean | `@${string}`,
 	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
@@ -902,17 +922,27 @@ export type ModelTypes = {
 	test: string
 };
 	["Mutation"]: {
-		addParameters: boolean
+		refreshStations: string
 };
 	["Station"]: {
-		_id: string,
-	city: string,
+		city: string,
+	stationId: number,
+	createdAt: string,
+	updatedAt: string,
 	parameters: Array<ModelTypes["Parameters"]>
 };
 	["Parameters"]: {
 		pm1?: number | undefined,
 	pm10?: number | undefined,
+	pm10Time?: string | undefined,
 	pm25?: number | undefined,
+	pm25Time?: string | undefined,
+	no2?: number | undefined,
+	no2Time?: string | undefined,
+	so2?: number | undefined,
+	so2Time?: string | undefined,
+	o3?: number | undefined,
+	o3Time?: string | undefined,
 	time: string
 };
 	["schema"]: {
@@ -930,19 +960,29 @@ export type GraphQLTypes = {
 };
 	["Mutation"]: {
 	__typename: "Mutation",
-	addParameters: boolean
+	refreshStations: string
 };
 	["Station"]: {
 	__typename: "Station",
-	_id: string,
 	city: string,
+	stationId: number,
+	createdAt: string,
+	updatedAt: string,
 	parameters: Array<GraphQLTypes["Parameters"]>
 };
 	["Parameters"]: {
 	__typename: "Parameters",
 	pm1?: number | undefined,
 	pm10?: number | undefined,
+	pm10Time?: string | undefined,
 	pm25?: number | undefined,
+	pm25Time?: string | undefined,
+	no2?: number | undefined,
+	no2Time?: string | undefined,
+	so2?: number | undefined,
+	so2Time?: string | undefined,
+	o3?: number | undefined,
+	o3Time?: string | undefined,
 	time: string
 }
     }

@@ -1,18 +1,8 @@
 {
     "resolvers": {
-        "Query.getStations": {
-            "resolve": {
-                "name": "lib/Query/getStations"
-            }
-        },
         "Query.test": {
             "resolve": {
                 "name": "lib/Query/test"
-            }
-        },
-        "Mutation.addParameters": {
-            "resolve": {
-                "name": "lib/Mutation/addParameters"
             }
         },
         "Query.getCityParameters": {
@@ -23,6 +13,11 @@
         "Query.getCollectedCities": {
             "resolve": {
                 "name": "lib/Query/getCollectedCities"
+            }
+        },
+        "Mutation.refreshStations": {
+            "resolve": {
+                "name": "lib\\Mutation\\refreshStations"
             }
         }
     }

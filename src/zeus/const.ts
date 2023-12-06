@@ -5,11 +5,6 @@ export const AllTypesProps: Record<string,any> = {
 		getCityParameters:{
 
 		}
-	},
-	Mutation:{
-		addParameters:{
-
-		}
 	}
 }
 
@@ -20,17 +15,27 @@ export const ReturnTypes: Record<string,any> = {
 		test:"String"
 	},
 	Mutation:{
-		addParameters:"Boolean"
+		refreshStations:"String"
 	},
 	Station:{
-		_id:"String",
 		city:"String",
+		stationId:"Int",
+		createdAt:"String",
+		updatedAt:"String",
 		parameters:"Parameters"
 	},
 	Parameters:{
 		pm1:"Float",
 		pm10:"Float",
+		pm10Time:"String",
 		pm25:"Float",
+		pm25Time:"String",
+		no2:"Float",
+		no2Time:"String",
+		so2:"Float",
+		so2Time:"String",
+		o3:"Float",
+		o3Time:"String",
 		time:"String"
 	}
 }

@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "gecli dev",
+    "clean": "node ./node_modules/.bin/stucco local start",
     "build": "tsc",
     "watch": "tsc --watch",
     "update": "gecli codegen models && gecli schema pull && gecli codegen typings"
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
+    "graphql-editor-cli": "^0.9.1",
     "i-graphql": "^0.1.2",
     "mongodb": "^5.1.0",
     "node-fetch": "^3.2.10",

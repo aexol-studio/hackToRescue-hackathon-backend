@@ -5,17 +5,26 @@ import { Models } from '../models';
 export const orm = async () => {
   return iGraphQL<
     {
-      stations: Models['StationModel'];
+      file_stations: Models['StationModel'];
+      cities: {
+        name: string
+        createdAt: Date,
+        location: {
+          lat: number,
+          long: number
+        }
+        country: string,
+      }
+      locks: {
+        lockTime: number;
+        lockTitle: string;
+      }
     },
     {
       _id: () => string;
-      updatedAt: () => Date;
-      createdAt: () => Date;
     }
   >({
     _id: () => new ObjectId().toHexString(),
-    updatedAt: () => new Date(),
-    createdAt: () => new Date(),
   });
 };
 
