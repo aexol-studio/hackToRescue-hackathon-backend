@@ -28,7 +28,7 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "i-graphql": "^0.1.2",
-    "mongodb": "^ .1.0",
+    "mongodb": "^5.1.0",
     "node-fetch": "^3.2.10",
     "node-xlsx": "^0.23.0",
     "stucco-js": "^0.10.17",

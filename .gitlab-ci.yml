@@ -9,14 +9,13 @@ build:
   stage: build
   image: node:16
   script:
-    - echo ${gitlab-ci-token}
-    - npm ci
+    - npm i
     - npm run build
 
 build-image:
   stage: build-image
   variables:
-    REGISTRY: registry.gitlab.aexol.com/aexol/backend/hacktotherescue
+    REGISTRY: registry.gitlab.aexol.com/openspace/hacktotherescue
     TAG: ${CI_COMMIT_SHORT_SHA}
   image: docker:20.10.13
   script:
