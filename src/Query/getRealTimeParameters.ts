@@ -30,7 +30,5 @@ export const handler = async (input: FieldResolveInput) =>
       o3: quality.o3IndexLevel?.id || station.parameters[station.parameters.length - 1].o3 || undefined,
       time: new Date().toISOString(),
     };
-
-
     return ({ ...station, parameters: [parameter] })
   })(input.arguments);

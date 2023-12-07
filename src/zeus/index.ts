@@ -843,6 +843,7 @@ export type ValueTypes = {
 getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
 getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes["Station"]],
 	getCollectedCities?:ValueTypes["City"],
+getRealTimeWeather?: [{	lat: number | Variable<any, string>,	long: number | Variable<any, string>},ValueTypes["Weather"]],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
@@ -857,6 +858,15 @@ getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes
 	location?:ValueTypes["PureLocation"],
 	stationsInCity?:ValueTypes["Station"],
 	createdAt?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["Weather"]: AliasType<{
+	main?:boolean | `@${string}`,
+	description?:boolean | `@${string}`,
+	temp?:boolean | `@${string}`,
+	feelTemp?:boolean | `@${string}`,
+	humidity?:boolean | `@${string}`,
+	clouds?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -874,6 +884,7 @@ getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes
 		__typename?: boolean | `@${string}`
 }>;
 	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
+	["STATION_KIND"]:STATION_KIND;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
 	pm2p5?:boolean | `@${string}`,
@@ -897,6 +908,7 @@ export type ResolverInputTypes = {
 getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
 getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 	getCollectedCities?:ResolverInputTypes["City"],
+getRealTimeWeather?: [{	lat: number,	long: number},ResolverInputTypes["Weather"]],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
@@ -911,6 +923,15 @@ getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 	location?:ResolverInputTypes["PureLocation"],
 	stationsInCity?:ResolverInputTypes["Station"],
 	createdAt?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["Weather"]: AliasType<{
+	main?:boolean | `@${string}`,
+	description?:boolean | `@${string}`,
+	temp?:boolean | `@${string}`,
+	feelTemp?:boolean | `@${string}`,
+	humidity?:boolean | `@${string}`,
+	clouds?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -928,6 +949,7 @@ getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 		__typename?: boolean | `@${string}`
 }>;
 	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
+	["STATION_KIND"]:STATION_KIND;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
 	pm2p5?:boolean | `@${string}`,
@@ -956,6 +978,7 @@ export type ModelTypes = {
 		getCityParameters: Array<ModelTypes["Station"]>,
 	getRealTimeParameters?: ModelTypes["Station"] | undefined,
 	getCollectedCities: Array<ModelTypes["City"]>,
+	getRealTimeWeather: ModelTypes["Weather"],
 	test: string
 };
 	["Mutation"]: {
@@ -968,6 +991,14 @@ export type ModelTypes = {
 	location: ModelTypes["PureLocation"],
 	stationsInCity: Array<ModelTypes["Station"]>,
 	createdAt: string
+};
+	["Weather"]: {
+		main: string,
+	description: string,
+	temp: number,
+	feelTemp: number,
+	humidity?: number | undefined,
+	clouds?: number | undefined
 };
 	["Station"]: {
 		city: string,
@@ -982,6 +1013,7 @@ export type ModelTypes = {
 	long: number
 };
 	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
+	["STATION_KIND"]:STATION_KIND;
 	["Parameters"]: {
 		pm1?: number | undefined,
 	pm2p5?: number | undefined,
@@ -1009,6 +1041,7 @@ export type GraphQLTypes = {
 	getCityParameters: Array<GraphQLTypes["Station"]>,
 	getRealTimeParameters?: GraphQLTypes["Station"] | undefined,
 	getCollectedCities: Array<GraphQLTypes["City"]>,
+	getRealTimeWeather: GraphQLTypes["Weather"],
 	test: string
 };
 	["Mutation"]: {
@@ -1023,6 +1056,15 @@ export type GraphQLTypes = {
 	location: GraphQLTypes["PureLocation"],
 	stationsInCity: Array<GraphQLTypes["Station"]>,
 	createdAt: string
+};
+	["Weather"]: {
+	__typename: "Weather",
+	main: string,
+	description: string,
+	temp: number,
+	feelTemp: number,
+	humidity?: number | undefined,
+	clouds?: number | undefined
 };
 	["Station"]: {
 	__typename: "Station",
@@ -1039,6 +1081,7 @@ export type GraphQLTypes = {
 	long: number
 };
 	["DATA_SOURCE_TYPE"]: DATA_SOURCE_TYPE;
+	["STATION_KIND"]: STATION_KIND;
 	["Parameters"]: {
 	__typename: "Parameters",
 	pm1?: number | undefined,
@@ -1061,7 +1104,12 @@ export const enum DATA_SOURCE_TYPE {
 	MANUAL = "MANUAL",
 	AUTOMATIC = "AUTOMATIC"
 }
+export const enum STATION_KIND {
+	GOV = "GOV",
+	OPEN_WEATHER = "OPEN_WEATHER"
+}
 
 type ZEUS_VARIABLES = {
 	["DATA_SOURCE_TYPE"]: ValueTypes["DATA_SOURCE_TYPE"];
+	["STATION_KIND"]: ValueTypes["STATION_KIND"];
 }

@@ -1,59 +1,85 @@
-type Query {
-  getCityParameters(city: String!, stationId: Int, startDate: String, endDate: String): [Station!]!
-  getRealTimeParameters(stationId: Int!): Station
-  getCollectedCities: [City!]!
+type Query{
+	getCityParameters(
+		city: String!
+		stationId: Int
+		startDate: String
+		endDate: String
+	): [Station!]!
+	getRealTimeParameters(
+		stationId: Int!
+	): Station
+	getCollectedCities: [City!]!
+	getRealTimeWeather(
+		lat: Float!
+		long: Float!
+	): Weather!
+	test: String!
 }
 
-type Mutation {
-  refreshStations: String!
+type Mutation{
+	refreshStations: String!
 }
 
-type City {
-  country: String!
-  name: String!
-  state: String!
-  location: PureLocation!
-  stationsInCity: [Station!]!
-  createdAt: String!
+type City{
+	country: String!
+	name: String!
+	state: String!
+	location: PureLocation!
+	stationsInCity: [Station!]!
+	createdAt: String!
 }
 
-type Station {
-  city: String!
-  stationId: Int
-  kind: DATA_SOURCE_TYPE!
-  createdAt: String!
-  updatedAt: String!
-  parameters: [Parameters!]!
+type Weather{
+	main: String!
+	description: String!
+	temp: Float!
+	feelTemp: Float!
+	humidity: Int
+	clouds: Int
 }
 
-type PureLocation {
-  lat: Float!
-  long: Float!
+type Station{
+	city: String!
+	stationId: Int
+	kind: DATA_SOURCE_TYPE!
+	createdAt: String!
+	updatedAt: String!
+	parameters: [Parameters!]!
 }
 
-enum DATA_SOURCE_TYPE {
-  OPEN_WEATHER
-  MANUAL
-  AUTOMATIC
+type PureLocation{
+	lat: Float!
+	long: Float!
 }
 
-type Parameters {
-  pm1: Float
-  pm2p5: Float
-  pm10: Float
-  pm10Time: String
-  pm25: Float
-  pm25Time: String
-  no2: Float
-  no2Time: String
-  so2: Float
-  so2Time: String
-  o3: Float
-  o3Time: String
-  time: String!
+enum DATA_SOURCE_TYPE{
+	OPEN_WEATHER
+	MANUAL
+	AUTOMATIC
 }
 
-schema {
-  query: Query
-  mutation: Mutation
+enum STATION_KIND{
+	GOV
+	OPEN_WEATHER
+}
+
+type Parameters{
+	pm1: Float
+	pm2p5: Float
+	pm10: Float
+	pm10Time: String
+	pm25: Float
+	pm25Time: String
+	no2: Float
+	no2Time: String
+	so2: Float
+	so2Time: String
+	o3: Float
+	o3Time: String
+	time: String!
+}
+
+schema{
+	query: Query
+	mutation: Mutation
 }
