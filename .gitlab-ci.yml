@@ -3,7 +3,6 @@ image: node:16
 stages:
   - build
   - build-image
-  - deploy
 
 build:
   stage: build
@@ -25,19 +24,3 @@ build-image:
     - docker login registry.gitlab.aexol.com -u gitlab-ci-token -p $CI_JOB_TOKEN
     - docker push ${REGISTRY}/api:latest
     - docker push ${REGISTRY}/api:${TAG}
-
-deploy:
-  stage: deploy
-  image:
-    name: alpine/k8s:1.21.5
-    entrypoint: ['']
-  variables:
-    RELEASE: hacktorescue
-    NAMESPACE: foodeli-dev
-    TAG: ${CI_COMMIT_SHORT_SHA}
-  before_script:
-    - kubectl config get-contexts
-    - kubectl config use-context openspace/hacktotherescue:hackyeah-agnet
-  script:
-    - cd helm
-    - sh ./api.sh

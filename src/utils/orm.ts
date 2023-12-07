@@ -10,6 +10,22 @@ export const orm = async () => {
       locks: {
         lockTime: number;
         lockTitle: string;
+      },
+      weather_caches: {
+        city: string,
+        createdAt: Date,
+        statistics: {
+          main?: string,
+          description?: string,
+          temp?: number
+          feelTemp?: number,
+          clouds?: number,
+          humidity?: number,
+          pressure?: number,
+          gustSpeed?: number,
+          windSpeed?: number,
+          windDeg?: number
+        }
       }
     },
     {
