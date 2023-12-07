@@ -11,11 +11,17 @@ export const AllTypesProps: Record<string,any> = {
 export const ReturnTypes: Record<string,any> = {
 	Query:{
 		getCityParameters:"Station",
-		getCollectedCities:"String",
+		getCollectedCities:"City",
 		test:"String"
 	},
 	Mutation:{
 		refreshStations:"String"
+	},
+	City:{
+		country:"String",
+		name:"String",
+		location:"PureLocation",
+		createdAt:"String"
 	},
 	Station:{
 		city:"String",
@@ -23,6 +29,10 @@ export const ReturnTypes: Record<string,any> = {
 		createdAt:"String",
 		updatedAt:"String",
 		parameters:"Parameters"
+	},
+	PureLocation:{
+		lat:"Float",
+		long:"Float"
 	},
 	Parameters:{
 		pm1:"Float",

@@ -73,8 +73,7 @@ export const handler = async (input: FieldResolveInput) =>
           pm25: quality.pm25IndexLevel?.id,
           no2: quality.no2IndexLevel?.id,
           so2: quality.so2IndexLevel?.id,
-          o3: quality.o3IndexLevel?.id,
-          time: new Date().toISOString(),
+          o3: quality.o3IndexLevel?.id
         }]
         await o("file_stations").collection.insertOne({
           city: station.city.name,

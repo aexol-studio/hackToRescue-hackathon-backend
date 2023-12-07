@@ -5,12 +5,19 @@ type Query{
 		startDate: String
 		endDate: String
 	): [Station!]!
-	getCollectedCities: [String!]!
+	getCollectedCities: [City!]!
 	test: String!
 }
 
 type Mutation{
 	refreshStations: String!
+}
+
+type City{
+	country: String!
+	name: String!
+	location: PureLocation!
+	createdAt: String!
 }
 
 type Station{
@@ -19,6 +26,11 @@ type Station{
 	createdAt: String!
 	updatedAt: String!
 	parameters: [Parameters!]!
+}
+
+type PureLocation{
+	lat: Float!
+	long: Float!
 }
 
 type Parameters{

@@ -841,12 +841,19 @@ type ZEUS_UNIONS = never
 export type ValueTypes = {
     ["Query"]: AliasType<{
 getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
-	getCollectedCities?:boolean | `@${string}`,
+	getCollectedCities?:ValueTypes["City"],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
 	refreshStations?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["City"]: AliasType<{
+	country?:boolean | `@${string}`,
+	name?:boolean | `@${string}`,
+	location?:ValueTypes["PureLocation"],
+	createdAt?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -855,6 +862,11 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	createdAt?:boolean | `@${string}`,
 	updatedAt?:boolean | `@${string}`,
 	parameters?:ValueTypes["Parameters"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PureLocation"]: AliasType<{
+	lat?:boolean | `@${string}`,
+	long?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Parameters"]: AliasType<{
@@ -876,12 +888,19 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 export type ResolverInputTypes = {
     ["Query"]: AliasType<{
 getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
-	getCollectedCities?:boolean | `@${string}`,
+	getCollectedCities?:ResolverInputTypes["City"],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
 	refreshStations?:boolean | `@${string}`,
+		__typename?: boolean | `@${string}`
+}>;
+	["City"]: AliasType<{
+	country?:boolean | `@${string}`,
+	name?:boolean | `@${string}`,
+	location?:ResolverInputTypes["PureLocation"],
+	createdAt?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -890,6 +909,11 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	createdAt?:boolean | `@${string}`,
 	updatedAt?:boolean | `@${string}`,
 	parameters?:ResolverInputTypes["Parameters"],
+		__typename?: boolean | `@${string}`
+}>;
+	["PureLocation"]: AliasType<{
+	lat?:boolean | `@${string}`,
+	long?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Parameters"]: AliasType<{
@@ -916,11 +940,17 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 export type ModelTypes = {
     ["Query"]: {
 		getCityParameters: Array<ModelTypes["Station"]>,
-	getCollectedCities: Array<string>,
+	getCollectedCities: Array<ModelTypes["City"]>,
 	test: string
 };
 	["Mutation"]: {
 		refreshStations: string
+};
+	["City"]: {
+		country: string,
+	name: string,
+	location: ModelTypes["PureLocation"],
+	createdAt: string
 };
 	["Station"]: {
 		city: string,
@@ -928,6 +958,10 @@ export type ModelTypes = {
 	createdAt: string,
 	updatedAt: string,
 	parameters: Array<ModelTypes["Parameters"]>
+};
+	["PureLocation"]: {
+		lat: number,
+	long: number
 };
 	["Parameters"]: {
 		pm1?: number | undefined,
@@ -952,12 +986,19 @@ export type GraphQLTypes = {
     ["Query"]: {
 	__typename: "Query",
 	getCityParameters: Array<GraphQLTypes["Station"]>,
-	getCollectedCities: Array<string>,
+	getCollectedCities: Array<GraphQLTypes["City"]>,
 	test: string
 };
 	["Mutation"]: {
 	__typename: "Mutation",
 	refreshStations: string
+};
+	["City"]: {
+	__typename: "City",
+	country: string,
+	name: string,
+	location: GraphQLTypes["PureLocation"],
+	createdAt: string
 };
 	["Station"]: {
 	__typename: "Station",
@@ -966,6 +1007,11 @@ export type GraphQLTypes = {
 	createdAt: string,
 	updatedAt: string,
 	parameters: Array<GraphQLTypes["Parameters"]>
+};
+	["PureLocation"]: {
+	__typename: "PureLocation",
+	lat: number,
+	long: number
 };
 	["Parameters"]: {
 	__typename: "Parameters",
