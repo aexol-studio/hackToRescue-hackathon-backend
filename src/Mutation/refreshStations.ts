@@ -87,7 +87,7 @@ const airQualityCategories: AirQualityCategory[] = [
   },
 ];
 
-const getIndex = (pollutant: keyof AirQualityCategory['ranges'], value: number): number => {
+export const getIndex = (pollutant: keyof AirQualityCategory['ranges'], value: number): number => {
   for (const category of airQualityCategories) {
     const [min, max] = category.ranges[pollutant];
     if (value >= min && value <= max) {
@@ -96,7 +96,6 @@ const getIndex = (pollutant: keyof AirQualityCategory['ranges'], value: number):
   }
   return -1;
 };
-
 
 export type fetchedStation = {
   id: number;
@@ -123,9 +122,9 @@ export const handler = async (input: FieldResolveInput) =>
       lockTitle: 'refreshStations',
       lockTime: { $lte: new Date().getTime() },
     });
-    if (!locker) {
-      return;
-    }
+    // if (!locker) {
+    //   return;
+    // }
     await o('locks').collection.updateOne({ lockTitle: 'refreshStations' }, { $set: { lockTime: d } });
     const stations = await fetcher<fetchedStation[]>(`${getEnv('API_URL')}/station/findAll`);
     if (!stations) {
@@ -176,6 +175,7 @@ export const handler = async (input: FieldResolveInput) =>
               no2: quality.no2IndexLevel?.id,
               so2: quality.so2IndexLevel?.id,
               o3: quality.o3IndexLevel?.id,
+              time: new Date().toISOString(),
             },
           ];
           await o('file_stations').collection.insertOne({
@@ -184,7 +184,7 @@ export const handler = async (input: FieldResolveInput) =>
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             parameters,
-            kind: DATA_SOURCE_TYPE.AUTOMATIC
+            kind: DATA_SOURCE_TYPE.AUTOMATIC,
           });
           return;
         }
@@ -263,13 +263,29 @@ export const handler = async (input: FieldResolveInput) =>
               s.parameters[s.parameters.length - 1].o3Time !== quality.o3SourceDataDate
               ? quality.o3IndexLevel?.id
               : undefined,
+          time: new Date().toISOString(),
         };
         if (!!parameter.pm10 || !!parameter.pm25 || !!parameter.no2 || !!parameter.so2 || !!parameter.o3)
-          if (s.parameters[s.parameters.length - 1].pm10Time !== quality.pm10SourceDataDate || s.parameters[s.parameters.length - 1].no2Time !== quality.no2SourceDataDate || s.parameters[s.parameters.length - 1].so2Time !== quality.so2SourceDataDate || s.parameters[s.parameters.length - 1].pm25Time !== quality.pm25SourceDataDate || s.parameters[s.parameters.length - 1].o3Time !== quality.o3SourceDataDate || s.parameters[s.parameters.length - 1].so2Time !== quality.so2SourceDataDate) {
-            if (s.parameters[s.parameters.length - 1].o3Time?.length || s.parameters[s.parameters.length - 1].so2Time?.length || s.parameters[s.parameters.length - 1].no2Time?.length || s.parameters[s.parameters.length - 1].pm25Time?.length || s.parameters[s.parameters.length - 1].pm10Time?.length)
-              await o('file_stations').collection.updateOne({ stationId: station.id }, { $push: { parameters: parameter }, $set: { updatedAt: new Date().toISOString() } });
+          if (
+            s.parameters[s.parameters.length - 1].pm10Time !== quality.pm10SourceDataDate ||
+            s.parameters[s.parameters.length - 1].no2Time !== quality.no2SourceDataDate ||
+            s.parameters[s.parameters.length - 1].so2Time !== quality.so2SourceDataDate ||
+            s.parameters[s.parameters.length - 1].pm25Time !== quality.pm25SourceDataDate ||
+            s.parameters[s.parameters.length - 1].o3Time !== quality.o3SourceDataDate ||
+            s.parameters[s.parameters.length - 1].so2Time !== quality.so2SourceDataDate
+          ) {
+            if (
+              s.parameters[s.parameters.length - 1].o3Time?.length ||
+              s.parameters[s.parameters.length - 1].so2Time?.length ||
+              s.parameters[s.parameters.length - 1].no2Time?.length ||
+              s.parameters[s.parameters.length - 1].pm25Time?.length ||
+              s.parameters[s.parameters.length - 1].pm10Time?.length
+            )
+              await o('file_stations').collection.updateOne(
+                { stationId: station.id },
+                { $push: { parameters: parameter }, $set: { updatedAt: new Date().toISOString() } },
+              );
           }
-
       }),
     );
     const refreshOpenWeatherLocker = await o('locks').collection.findOne({
@@ -289,30 +305,36 @@ export const handler = async (input: FieldResolveInput) =>
           }&appid=${getEnv('OPENWEATHER_API_KEY')}`,
         ).then((r) => r.json());
         const parameter = {
-          co: getIndex("co", data.list[0].components.co),
-          no2: getIndex("no2", data.list[0].components.no2),
-          o3: getIndex("o3", data.list[0].components.o3),
-          so2: getIndex("so2", data.list[0].components.so2),
-          pm2p5: getIndex("pm2p5", data.list[0].components.pm2_5),
-          pm10: getIndex("pm10", data.list[0].components.pm10),
-          time: new Date().toISOString(),
-        }
-        const openWeatherApi = await o("file_stations").collection.findOne({ city: city.name, kind: DATA_SOURCE_TYPE.OPEN_WEATHER });
+          co: getIndex('co', data.list[0].components.co),
+          no2: getIndex('no2', data.list[0].components.no2),
+          o3: getIndex('o3', data.list[0].components.o3),
+          so2: getIndex('so2', data.list[0].components.so2),
+          pm2p5: getIndex('pm2p5', data.list[0].components.pm2_5),
+          pm10: getIndex('pm10', data.list[0].components.pm10),
+          time: new Date(data.list[0].dt * 1000).toISOString(),
+        };
+        const openWeatherApi = await o('file_stations').collection.findOne({
+          city: city.name,
+          kind: DATA_SOURCE_TYPE.OPEN_WEATHER,
+        });
         if (!openWeatherApi) {
-          await o("file_stations").createWithAutoFields()({
+          await o('file_stations').createWithAutoFields()({
             city: city.name,
             kind: DATA_SOURCE_TYPE.OPEN_WEATHER,
             parameters: [parameter],
             createdAt: new Date().toISOString(),
             updatedAt: new Date().toISOString(),
-          })
+          });
         } else {
           const currentDate = new Date();
           const futureDate = new Date(currentDate.getTime() - 2 * 60 * 60 * 1000);
           if (futureDate > new Date(openWeatherApi.updatedAt))
-            await o('file_stations').collection.updateOne({ city: city.name, kind: DATA_SOURCE_TYPE.OPEN_WEATHER }, { $push: { parameters: parameter }, $set: { updatedAt: new Date().toISOString() } }, {});
+            await o('file_stations').collection.updateOne(
+              { city: city.name, kind: DATA_SOURCE_TYPE.OPEN_WEATHER },
+              { $push: { parameters: parameter }, $set: { updatedAt: new Date().toISOString() } },
+              {},
+            );
         }
-
       }),
     );
     return 'Ok';

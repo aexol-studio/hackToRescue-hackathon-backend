@@ -4,6 +4,9 @@ export const AllTypesProps: Record<string,any> = {
 	Query:{
 		getCityParameters:{
 
+		},
+		getRealTimeParameters:{
+
 		}
 	},
 	DATA_SOURCE_TYPE: "enum" as const
@@ -12,6 +15,7 @@ export const AllTypesProps: Record<string,any> = {
 export const ReturnTypes: Record<string,any> = {
 	Query:{
 		getCityParameters:"Station",
+		getRealTimeParameters:"Station",
 		getCollectedCities:"City",
 		test:"String"
 	},

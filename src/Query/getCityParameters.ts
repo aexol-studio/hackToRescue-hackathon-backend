@@ -11,5 +11,5 @@ export const handler = async (input: FieldResolveInput) =>
       ...(startDate && { 'parameters.startDate': { $gte: startDate } }),
       ...(endDate && { 'parameters.endDate': { $lte: endDate } }),
     }).toArray();
-    return t;
+    return t.map((station) => ({ ...t, parameters: station.parameters.sort((a, b) => new Date(a.time) > new Date(b.time) ? -1 : new Date(a.time) < new Date(b.time) ? 1 : 0) }))
   })(input.arguments);

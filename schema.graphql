@@ -5,6 +5,9 @@ type Query{
 		startDate: String
 		endDate: String
 	): [Station!]!
+	getRealTimeParameters(
+		stationId: Int!
+	): Station
 	getCollectedCities: [City!]!
 	test: String!
 }
@@ -55,7 +58,7 @@ type Parameters{
 	so2Time: String
 	o3: Float
 	o3Time: String
-	time: String
+	time: String!
 }
 
 schema{

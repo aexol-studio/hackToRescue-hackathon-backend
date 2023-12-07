@@ -841,6 +841,7 @@ type ZEUS_UNIONS = never
 export type ValueTypes = {
     ["Query"]: AliasType<{
 getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
+getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes["Station"]],
 	getCollectedCities?:ValueTypes["City"],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
@@ -894,6 +895,7 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 export type ResolverInputTypes = {
     ["Query"]: AliasType<{
 getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
+getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 	getCollectedCities?:ResolverInputTypes["City"],
 	test?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
@@ -952,6 +954,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 export type ModelTypes = {
     ["Query"]: {
 		getCityParameters: Array<ModelTypes["Station"]>,
+	getRealTimeParameters?: ModelTypes["Station"] | undefined,
 	getCollectedCities: Array<ModelTypes["City"]>,
 	test: string
 };
@@ -992,7 +995,7 @@ export type ModelTypes = {
 	so2Time?: string | undefined,
 	o3?: number | undefined,
 	o3Time?: string | undefined,
-	time?: string | undefined
+	time: string
 };
 	["schema"]: {
 	query?: ModelTypes["Query"] | undefined,
@@ -1004,6 +1007,7 @@ export type GraphQLTypes = {
     ["Query"]: {
 	__typename: "Query",
 	getCityParameters: Array<GraphQLTypes["Station"]>,
+	getRealTimeParameters?: GraphQLTypes["Station"] | undefined,
 	getCollectedCities: Array<GraphQLTypes["City"]>,
 	test: string
 };
@@ -1049,7 +1053,7 @@ export type GraphQLTypes = {
 	so2Time?: string | undefined,
 	o3?: number | undefined,
 	o3Time?: string | undefined,
-	time?: string | undefined
+	time: string
 }
     }
 export const enum DATA_SOURCE_TYPE {

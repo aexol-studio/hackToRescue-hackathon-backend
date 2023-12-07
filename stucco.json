@@ -1,24 +1,30 @@
 {
-    "resolvers": {
-        "Query.test": {
-            "resolve": {
-                "name": "lib\\Query\\test"
-            }
-        },
-        "Query.getCityParameters": {
-            "resolve": {
-                "name": "lib/Query/getCityParameters"
-            }
-        },
-        "Query.getCollectedCities": {
-            "resolve": {
-                "name": "lib/Query/getCollectedCities"
-            }
-        },
-        "Mutation.refreshStations": {
-            "resolve": {
-                "name": "lib\\Mutation\\refreshStations"
-            }
-        }
+  "requestTimeout": -1,
+  "resolvers": {
+    "Query.test": {
+      "resolve": {
+        "name": "lib\\Query\\test"
+      }
+    },
+    "Query.getCityParameters": {
+      "resolve": {
+        "name": "lib/Query/getCityParameters"
+      }
+    },
+    "Query.getCollectedCities": {
+      "resolve": {
+        "name": "lib/Query/getCollectedCities"
+      }
+    },
+    "Mutation.refreshStations": {
+      "resolve": {
+        "name": "lib\\Mutation\\refreshStations"
+      }
+    },
+    "Query.getRealTimeParameters": {
+      "resolve": {
+        "name": "lib\\Query\\getRealTimeParameters"
+      }
     }
+  }
 }
