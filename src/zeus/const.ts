@@ -35,8 +35,7 @@ export const ReturnTypes: Record<string,any> = {
 		so2:"Float",
 		so2Time:"String",
 		o3:"Float",
-		o3Time:"String",
-		time:"String"
+		o3Time:"String"
 	}
 }
 

@@ -869,7 +869,6 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	so2Time?:boolean | `@${string}`,
 	o3?:boolean | `@${string}`,
 	o3Time?:boolean | `@${string}`,
-	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>
   }
@@ -905,7 +904,6 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	so2Time?:boolean | `@${string}`,
 	o3?:boolean | `@${string}`,
 	o3Time?:boolean | `@${string}`,
-	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["schema"]: AliasType<{
@@ -917,7 +915,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 
 export type ModelTypes = {
     ["Query"]: {
-		getCityParameters: ModelTypes["Station"],
+		getCityParameters: Array<ModelTypes["Station"]>,
 	getCollectedCities: Array<string>,
 	test: string
 };
@@ -942,8 +940,7 @@ export type ModelTypes = {
 	so2?: number | undefined,
 	so2Time?: string | undefined,
 	o3?: number | undefined,
-	o3Time?: string | undefined,
-	time: string
+	o3Time?: string | undefined
 };
 	["schema"]: {
 	query?: ModelTypes["Query"] | undefined,
@@ -954,7 +951,7 @@ export type ModelTypes = {
 export type GraphQLTypes = {
     ["Query"]: {
 	__typename: "Query",
-	getCityParameters: GraphQLTypes["Station"],
+	getCityParameters: Array<GraphQLTypes["Station"]>,
 	getCollectedCities: Array<string>,
 	test: string
 };
@@ -982,8 +979,7 @@ export type GraphQLTypes = {
 	so2?: number | undefined,
 	so2Time?: string | undefined,
 	o3?: number | undefined,
-	o3Time?: string | undefined,
-	time: string
+	o3Time?: string | undefined
 }
     }
 

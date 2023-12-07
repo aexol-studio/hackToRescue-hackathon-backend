@@ -4,7 +4,7 @@ type Query{
 		stationId: Int
 		startDate: String
 		endDate: String
-	): Station!
+	): [Station!]!
 	getCollectedCities: [String!]!
 	test: String!
 }
@@ -33,7 +33,6 @@ type Parameters{
 	so2Time: String
 	o3: Float
 	o3Time: String
-	time: String!
 }
 
 schema{

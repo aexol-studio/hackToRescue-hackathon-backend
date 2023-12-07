@@ -101,7 +101,6 @@ export const handler = async (input: FieldResolveInput) =>
         no2: quality.no2SourceDataDate && s.parameters.length && s.parameters[s.parameters.length - 1].no2Time?.length && s.parameters[s.parameters.length - 1].no2Time !== quality.no2SourceDataDate ? quality.no2IndexLevel?.id : undefined,
         so2: quality.so2SourceDataDate && s.parameters.length && s.parameters[s.parameters.length - 1].so2Time?.length && s.parameters[s.parameters.length - 1].so2Time !== quality.so2SourceDataDate ? quality.so2IndexLevel?.id : undefined,
         o3: quality.o3SourceDataDate && s.parameters.length && s.parameters[s.parameters.length - 1].o3Time?.length && s.parameters[s.parameters.length - 1].o3Time !== quality.o3SourceDataDate ? quality.o3IndexLevel?.id : undefined,
-        time: new Date().toISOString(),
       }
 
       await o("file_stations").collection.updateOne({ stationId: station.id }, { $push: { parameters: parameter } })
