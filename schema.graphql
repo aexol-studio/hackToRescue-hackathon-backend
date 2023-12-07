@@ -1,67 +1,59 @@
-type Query{
-	getCityParameters(
-		city: String!
-		stationId: Int
-		startDate: String
-		endDate: String
-	): [Station!]!
-	getRealTimeParameters(
-		stationId: Int!
-	): Station
-	getCollectedCities: [City!]!
-	test: String!
+type Query {
+  getCityParameters(city: String!, stationId: Int, startDate: String, endDate: String): [Station!]!
+  getRealTimeParameters(stationId: Int!): Station
+  getCollectedCities: [City!]!
 }
 
-type Mutation{
-	refreshStations: String!
+type Mutation {
+  refreshStations: String!
 }
 
-type City{
-	country: String!
-	name: String!
-	state: String!
-	location: PureLocation!
-	stationsInCity: [Station!]!
-	createdAt: String!
+type City {
+  country: String!
+  name: String!
+  state: String!
+  location: PureLocation!
+  stationsInCity: [Station!]!
+  createdAt: String!
 }
 
-type Station{
-	city: String!
-	stationId: Int
-	kind: DATA_SOURCE_TYPE!
-	createdAt: String!
-	updatedAt: String!
-	parameters: [Parameters!]!
+type Station {
+  city: String!
+  stationId: Int
+  kind: DATA_SOURCE_TYPE!
+  createdAt: String!
+  updatedAt: String!
+  parameters: [Parameters!]!
 }
 
-type PureLocation{
-	lat: Float!
-	long: Float!
+type PureLocation {
+  lat: Float!
+  long: Float!
 }
 
-enum DATA_SOURCE_TYPE{
-	OPEN_WEATHER
-	MANUAL
-	AUTOMATIC
+enum DATA_SOURCE_TYPE {
+  OPEN_WEATHER
+  MANUAL
+  AUTOMATIC
 }
 
-type Parameters{
-	pm1: Float
-	pm2p5: Float
-	pm10: Float
-	pm10Time: String
-	pm25: Float
-	pm25Time: String
-	no2: Float
-	no2Time: String
-	so2: Float
-	so2Time: String
-	o3: Float
-	o3Time: String
-	time: String!
+type Parameters {
+  pm1: Float
+  pm2p5: Float
+  pm10: Float
+  pm10Time: String
+  pm25: Float
+  pm25Time: String
+  no2: Float
+  no2Time: String
+  so2: Float
+  so2Time: String
+  o3: Float
+  o3Time: String
+  time: String!
 }
 
-schema{
-	query: Query
-	mutation: Mutation
+schema {
+  query: Query
+  mutation: Mutation
 }
