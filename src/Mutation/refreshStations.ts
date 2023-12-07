@@ -33,7 +33,7 @@ export const handler = async (input: FieldResolveInput) =>
     if (!locker) {
       return;
     }
-    await o("locks").collection.updateOne({ lockTitle: "refreshStations" }, { lockTime: d })
+    await o("locks").collection.updateOne({ lockTitle: "refreshStations" }, { $set: { lockTime: d } })
     const stations = await fetcher<fetchedStation[]>(`${getEnv("API_URL")}/station/findAll`);
     if (!stations) {
       return;
@@ -47,7 +47,7 @@ export const handler = async (input: FieldResolveInput) =>
         }
         await o("cities").createWithAutoFields()({
           country: "PL",
-          createdAt: new Date(),
+          createdAt: new Date().toISOString(),
           name: city.city.name,
           location: {
             ...geo

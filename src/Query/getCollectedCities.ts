@@ -5,10 +5,14 @@ import { orm } from '../utils/orm.js';
 export const handler = async (input: FieldResolveInput) =>
   resolverFor('Query', 'getCollectedCities', async (args) => {
     const o = await orm();
-    return await o('cities')
+    const cities = await o('cities')
       .collection.find({})
-      .toArray().then((cities) => cities.map((city) => ({
-        ...city,
-        createdAt: new Date(city.createdAt).toISOString()
-      })));
+      .toArray();
+    return await Promise.all(cities.map(async (city) => {
+      const stations = await o("file_stations").collection.find({ city: city.name }).toArray().then((st) => st.map((s) => ({ ...s, createdAt: new Date(s.createdAt).toISOString() })));
+      return { ...city, createdAt: new Date(city.createdAt).toISOString(), stationsInCity: stations };
+    }
+    ));
   })(input.arguments);
+
+

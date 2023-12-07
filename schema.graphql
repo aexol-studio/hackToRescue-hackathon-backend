@@ -17,6 +17,7 @@ type City{
 	country: String!
 	name: String!
 	location: PureLocation!
+	stationsInCity: [Station!]!
 	createdAt: String!
 }
 

@@ -38,6 +38,16 @@ spec:
               secretKeyRef:
                 name: {{ include "tuki-backend-api.fullname" . }}
                 key: MONGO_URL
+          - name: API_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "tuki-backend-api.fullname" . }}
+                key: API_URL
+          - name: OPENWEATHER_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "tuki-backend-api.fullname" . }}
+                key: OPENWEATHER_API_KEY
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

@@ -21,6 +21,7 @@ export const ReturnTypes: Record<string,any> = {
 		country:"String",
 		name:"String",
 		location:"PureLocation",
+		stationsInCity:"Station",
 		createdAt:"String"
 	},
 	Station:{

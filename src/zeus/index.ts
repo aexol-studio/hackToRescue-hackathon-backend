@@ -853,6 +853,7 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	country?:boolean | `@${string}`,
 	name?:boolean | `@${string}`,
 	location?:ValueTypes["PureLocation"],
+	stationsInCity?:ValueTypes["Station"],
 	createdAt?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
@@ -900,6 +901,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	country?:boolean | `@${string}`,
 	name?:boolean | `@${string}`,
 	location?:ResolverInputTypes["PureLocation"],
+	stationsInCity?:ResolverInputTypes["Station"],
 	createdAt?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
@@ -950,6 +952,7 @@ export type ModelTypes = {
 		country: string,
 	name: string,
 	location: ModelTypes["PureLocation"],
+	stationsInCity: Array<ModelTypes["Station"]>,
 	createdAt: string
 };
 	["Station"]: {
@@ -998,6 +1001,7 @@ export type GraphQLTypes = {
 	country: string,
 	name: string,
 	location: GraphQLTypes["PureLocation"],
+	stationsInCity: Array<GraphQLTypes["Station"]>,
 	createdAt: string
 };
 	["Station"]: {

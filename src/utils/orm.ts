@@ -6,15 +6,7 @@ export const orm = async () => {
   return iGraphQL<
     {
       file_stations: Models['StationModel'];
-      cities: {
-        name: string
-        createdAt: Date,
-        location: {
-          lat: number,
-          long: number
-        }
-        country: string,
-      }
+      cities: Models["CityModel"];
       locks: {
         lockTime: number;
         lockTitle: string;
