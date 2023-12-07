@@ -15,7 +15,7 @@ interface Parameter {
   pm2p5: number;
   pm10: number;
   nh3: number;
-  [key: string]: number; // Add index signature
+  [key: string]: number;
 }
 
 interface AirQualityCategory {

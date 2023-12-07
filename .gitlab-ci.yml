@@ -33,7 +33,7 @@ deploy:
     entrypoint: ['']
   variables:
     RELEASE: hacktorescue
-    NAMESPACE: dev
+    NAMESPACE: foodeli-dev
     TAG: ${CI_COMMIT_SHORT_SHA}
   before_script:
     - kubectl config get-contexts

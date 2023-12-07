@@ -8,8 +8,9 @@ export const handler = async (input: FieldResolveInput) =>
     const t = await o('file_stations').collection.find({
       city,
       ...(stationId && { stationId }),
-      ...(startDate && { 'parameters.startDate': { $gte: startDate } }),
-      ...(endDate && { 'parameters.endDate': { $lte: endDate } }),
+      ...(startDate && { 'parameters.time': { $gte: startDate } }),
+      ...(endDate && { 'parameters.time': { $lte: endDate } }),
     }).toArray();
-    return t.map((station) => ({ ...t, parameters: station.parameters.sort((a, b) => new Date(a.time) > new Date(b.time) ? -1 : new Date(a.time) < new Date(b.time) ? 1 : 0) }))
+    return t;
+
   })(input.arguments);

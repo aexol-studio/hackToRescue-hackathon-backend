@@ -845,6 +845,7 @@ getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes
 	getCollectedCities?:ValueTypes["City"],
 getRealTimeWeather?: [{	lat: number | Variable<any, string>,	long: number | Variable<any, string>},ValueTypes["Weather"]],
 	test?:boolean | `@${string}`,
+getIndexForCity?: [{	city: string | Variable<any, string>,	day: number | Variable<any, string>},boolean | `@${string}`],
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
@@ -867,6 +868,10 @@ getRealTimeWeather?: [{	lat: number | Variable<any, string>,	long: number | Vari
 	feelTemp?:boolean | `@${string}`,
 	humidity?:boolean | `@${string}`,
 	clouds?:boolean | `@${string}`,
+	windSpeed?:boolean | `@${string}`,
+	gustSpeed?:boolean | `@${string}`,
+	windDeg?:boolean | `@${string}`,
+	pressure?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -910,6 +915,7 @@ getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 	getCollectedCities?:ResolverInputTypes["City"],
 getRealTimeWeather?: [{	lat: number,	long: number},ResolverInputTypes["Weather"]],
 	test?:boolean | `@${string}`,
+getIndexForCity?: [{	city: string,	day: number},boolean | `@${string}`],
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
@@ -932,6 +938,10 @@ getRealTimeWeather?: [{	lat: number,	long: number},ResolverInputTypes["Weather"]
 	feelTemp?:boolean | `@${string}`,
 	humidity?:boolean | `@${string}`,
 	clouds?:boolean | `@${string}`,
+	windSpeed?:boolean | `@${string}`,
+	gustSpeed?:boolean | `@${string}`,
+	windDeg?:boolean | `@${string}`,
+	pressure?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["Station"]: AliasType<{
@@ -979,7 +989,8 @@ export type ModelTypes = {
 	getRealTimeParameters?: ModelTypes["Station"] | undefined,
 	getCollectedCities: Array<ModelTypes["City"]>,
 	getRealTimeWeather: ModelTypes["Weather"],
-	test: string
+	test: string,
+	getIndexForCity: number
 };
 	["Mutation"]: {
 		refreshStations: string
@@ -993,12 +1004,16 @@ export type ModelTypes = {
 	createdAt: string
 };
 	["Weather"]: {
-		main: string,
-	description: string,
-	temp: number,
-	feelTemp: number,
+		main?: string | undefined,
+	description?: string | undefined,
+	temp?: number | undefined,
+	feelTemp?: number | undefined,
 	humidity?: number | undefined,
-	clouds?: number | undefined
+	clouds?: number | undefined,
+	windSpeed?: number | undefined,
+	gustSpeed?: number | undefined,
+	windDeg?: number | undefined,
+	pressure?: number | undefined
 };
 	["Station"]: {
 		city: string,
@@ -1042,7 +1057,8 @@ export type GraphQLTypes = {
 	getRealTimeParameters?: GraphQLTypes["Station"] | undefined,
 	getCollectedCities: Array<GraphQLTypes["City"]>,
 	getRealTimeWeather: GraphQLTypes["Weather"],
-	test: string
+	test: string,
+	getIndexForCity: number
 };
 	["Mutation"]: {
 	__typename: "Mutation",
@@ -1059,12 +1075,16 @@ export type GraphQLTypes = {
 };
 	["Weather"]: {
 	__typename: "Weather",
-	main: string,
-	description: string,
-	temp: number,
-	feelTemp: number,
+	main?: string | undefined,
+	description?: string | undefined,
+	temp?: number | undefined,
+	feelTemp?: number | undefined,
 	humidity?: number | undefined,
-	clouds?: number | undefined
+	clouds?: number | undefined,
+	windSpeed?: number | undefined,
+	gustSpeed?: number | undefined,
+	windDeg?: number | undefined,
+	pressure?: number | undefined
 };
 	["Station"]: {
 	__typename: "Station",

@@ -6,17 +6,16 @@ ingress:
   enabled: true
   className: nginx
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-http
+    cert-manager.io/cluster-issuer: letsencrypt-cf-dns-prod
     nginx.ingress.kubernetes.io/enable-cors: 'true'
-     nginx.ingress.kubernetes.io/cors-allow-origin: hack-to-rescue-hackathon.vercel.app localhost:3000
+    nginx.ingress.kubernetes.io/cors-allow-origin: hack-to-rescue-hackathon.vercel.app localhost:3000
     nginx.ingress.kubernetes.io/cors-allow-methods: 'PUT, GET, POST, OPTIONS, DELETE'
-
   hosts:
-    - host: api-hacktotherescue.aexol.work
+    - host: api-hacktotherescue.deliverky.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: api-hacktotherescue.aexol.work-tls
+    - secretName: api-hacktotherescue.deliverky.com
       hosts:
-        - api-hacktotherescue.aexol.work
+        - api-hacktotherescue.deliverky.com

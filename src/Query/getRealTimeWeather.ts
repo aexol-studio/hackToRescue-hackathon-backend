@@ -63,8 +63,12 @@ export const handler = async (input: FieldResolveInput) =>
       description: req.weather[0] && req.weather[0].description,
       main: req.weather[0] && req.weather[0].main,
       feelTemp: req.main.feels_like,
-      temp: req.main.temp,
-      clouds: req.clouds.all,
-      humidity: req.main.humidity
+      temp: req.main.temp && req.main.temp,
+      clouds: req.clouds.all && req.clouds.all,
+      humidity: req.main.humidity && req.main.humidity,
+      pressure: req.main.pressure && req.main.pressure,
+      gustSpeed: req.wind.gust && req.wind.gust,
+      windSpeed: req.wind.speed && req.wind.speed,
+      windDeg: req.wind.deg && req.wind.deg
     }
   })(input.arguments);

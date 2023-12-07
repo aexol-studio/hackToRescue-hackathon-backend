@@ -10,6 +10,9 @@ export const AllTypesProps: Record<string,any> = {
 		},
 		getRealTimeWeather:{
 
+		},
+		getIndexForCity:{
+
 		}
 	},
 	DATA_SOURCE_TYPE: "enum" as const,
@@ -22,7 +25,8 @@ export const ReturnTypes: Record<string,any> = {
 		getRealTimeParameters:"Station",
 		getCollectedCities:"City",
 		getRealTimeWeather:"Weather",
-		test:"String"
+		test:"String",
+		getIndexForCity:"Float"
 	},
 	Mutation:{
 		refreshStations:"String"
@@ -41,7 +45,11 @@ export const ReturnTypes: Record<string,any> = {
 		temp:"Float",
 		feelTemp:"Float",
 		humidity:"Int",
-		clouds:"Int"
+		clouds:"Int",
+		windSpeed:"Float",
+		gustSpeed:"Float",
+		windDeg:"Int",
+		pressure:"Float"
 	},
 	Station:{
 		city:"String",

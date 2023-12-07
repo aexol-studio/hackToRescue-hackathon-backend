@@ -25,6 +25,11 @@
             "resolve": {
                 "name": "lib\\Query\\getRealTimeWeather"
             }
+        },
+        "Query.getIndexForCity": {
+            "resolve": {
+                "name": "lib\\Query\\getIndexForCity"
+            }
         }
     }
 }
