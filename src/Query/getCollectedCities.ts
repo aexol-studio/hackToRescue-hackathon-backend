@@ -8,11 +8,11 @@ export const handler = async (input: FieldResolveInput) =>
     const cities = await o('cities')
       .collection.find({})
       .toArray();
-    return await Promise.all(cities.map(async (city) => {
-      const stations = await o("file_stations").collection.find({ city: city.name }).toArray().then((st) => st.map((s) => ({ ...s, createdAt: new Date(s.createdAt).toISOString() })));
-      return { ...city, createdAt: new Date(city.createdAt).toISOString(), stationsInCity: stations };
-    }
-    ));
+    // return await Promise.all(cities.map(async (city) => {
+    //   const stations = await o("file_stations").collection.find({ city: city.name }).toArray().then((st) => st.map((s) => ({ ...s, createdAt: new Date(s.createdAt).toISOString() })));
+    //   return { ...city, createdAt: new Date(city.createdAt).toISOString(), stationsInCity: stations };
+    // }
+    return cities;
   })(input.arguments);
 
 
