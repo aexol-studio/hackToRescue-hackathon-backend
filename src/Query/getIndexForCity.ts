@@ -2,9 +2,6 @@ import { FieldResolveInput } from 'stucco-js';
 import { DATA_SOURCE_TYPE, resolverFor } from '../zeus/index.js';
 import { orm } from '../utils/orm.js';
 
-const getIndexByFormula = (value: number, bottomLimit: number, upperLimit: number, middleLimit: number) =>
-  ((value - bottomLimit) / (upperLimit - bottomLimit)) * (upperLimit - middleLimit) + middleLimit;
-
 export const handler = async (input: FieldResolveInput) =>
   resolverFor('Query', 'getIndexForCity', async ({ city, day }) => {
     if (day > 14) {
@@ -24,9 +21,10 @@ export const handler = async (input: FieldResolveInput) =>
     const sortedParameters = file.parameters.sort((o1, o2) =>
       new Date(o1.time) > new Date(o2.time) ? -1 : new Date(o1.time) < new Date(o2.time) ? 1 : 0,
     );
-    if (!sortedParameters) {
+    if (!sortedParameters || sortedParameters.length < 1) {
       return [-1];
     }
+    console.log(sortedParameters);
     const currentDate = new Date();
 
     const slicedDays = sortedParameters.filter(

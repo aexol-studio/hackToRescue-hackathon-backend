@@ -1,35 +1,35 @@
 {
-    "requestTimeout": -1,
-    "resolvers": {
-        "Query.getCityParameters": {
-            "resolve": {
-                "name": "lib/Query/getCityParameters"
-            }
-        },
-        "Query.getCollectedCities": {
-            "resolve": {
-                "name": "lib/Query/getCollectedCities"
-            }
-        },
-        "Mutation.refreshStations": {
-            "resolve": {
-                "name": "lib\\Mutation\\refreshStations"
-            }
-        },
-        "Query.getRealTimeParameters": {
-            "resolve": {
-                "name": "lib\\Query\\getRealTimeParameters"
-            }
-        },
-        "Query.getRealTimeWeather": {
-            "resolve": {
-                "name": "lib\\Query\\getRealTimeWeather"
-            }
-        },
-        "Query.getIndexForCity": {
-            "resolve": {
-                "name": "lib\\Query\\getIndexForCity"
-            }
-        }
+  "requestTimeout": -1,
+  "resolvers": {
+    "Query.getCityParameters": {
+      "resolve": {
+        "name": "lib/Query/getCityParameters"
+      }
+    },
+    "Query.getCollectedCities": {
+      "resolve": {
+        "name": "lib/Query/getCollectedCities"
+      }
+    },
+    "Mutation.refreshStations": {
+      "resolve": {
+        "name": "lib\\Mutation\\refreshStations"
+      }
+    },
+    "Query.getRealTimeParameters": {
+      "resolve": {
+        "name": "lib\\Query\\getRealTimeParameters"
+      }
+    },
+    "Query.getRealTimeWeather": {
+      "resolve": {
+        "name": "lib\\Query\\getRealTimeWeather"
+      }
+    },
+    "Query.getIndexForCity": {
+      "resolve": {
+        "name": "lib\\Query\\getIndexForCity"
+      }
     }
+  }
 }
