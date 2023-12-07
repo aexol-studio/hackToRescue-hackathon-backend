@@ -16,6 +16,7 @@ type Mutation{
 type City{
 	country: String!
 	name: String!
+	state: String!
 	location: PureLocation!
 	stationsInCity: [Station!]!
 	createdAt: String!
@@ -23,7 +24,8 @@ type City{
 
 type Station{
 	city: String!
-	stationId: Int!
+	stationId: Int
+	kind: DATA_SOURCE_TYPE!
 	createdAt: String!
 	updatedAt: String!
 	parameters: [Parameters!]!
@@ -34,8 +36,15 @@ type PureLocation{
 	long: Float!
 }
 
+enum DATA_SOURCE_TYPE{
+	OPEN_WEATHER
+	MANUAL
+	AUTOMATIC
+}
+
 type Parameters{
 	pm1: Float
+	pm2p5: Float
 	pm10: Float
 	pm10Time: String
 	pm25: Float
@@ -46,6 +55,7 @@ type Parameters{
 	so2Time: String
 	o3: Float
 	o3Time: String
+	time: String
 }
 
 schema{

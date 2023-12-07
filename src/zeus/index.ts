@@ -852,6 +852,7 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	["City"]: AliasType<{
 	country?:boolean | `@${string}`,
 	name?:boolean | `@${string}`,
+	state?:boolean | `@${string}`,
 	location?:ValueTypes["PureLocation"],
 	stationsInCity?:ValueTypes["Station"],
 	createdAt?:boolean | `@${string}`,
@@ -860,6 +861,7 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	["Station"]: AliasType<{
 	city?:boolean | `@${string}`,
 	stationId?:boolean | `@${string}`,
+	kind?:boolean | `@${string}`,
 	createdAt?:boolean | `@${string}`,
 	updatedAt?:boolean | `@${string}`,
 	parameters?:ValueTypes["Parameters"],
@@ -870,8 +872,10 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	long?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
+	pm2p5?:boolean | `@${string}`,
 	pm10?:boolean | `@${string}`,
 	pm10Time?:boolean | `@${string}`,
 	pm25?:boolean | `@${string}`,
@@ -882,6 +886,7 @@ getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number 
 	so2Time?:boolean | `@${string}`,
 	o3?:boolean | `@${string}`,
 	o3Time?:boolean | `@${string}`,
+	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>
   }
@@ -900,6 +905,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	["City"]: AliasType<{
 	country?:boolean | `@${string}`,
 	name?:boolean | `@${string}`,
+	state?:boolean | `@${string}`,
 	location?:ResolverInputTypes["PureLocation"],
 	stationsInCity?:ResolverInputTypes["Station"],
 	createdAt?:boolean | `@${string}`,
@@ -908,6 +914,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	["Station"]: AliasType<{
 	city?:boolean | `@${string}`,
 	stationId?:boolean | `@${string}`,
+	kind?:boolean | `@${string}`,
 	createdAt?:boolean | `@${string}`,
 	updatedAt?:boolean | `@${string}`,
 	parameters?:ResolverInputTypes["Parameters"],
@@ -918,8 +925,10 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	long?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
+	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
 	["Parameters"]: AliasType<{
 	pm1?:boolean | `@${string}`,
+	pm2p5?:boolean | `@${string}`,
 	pm10?:boolean | `@${string}`,
 	pm10Time?:boolean | `@${string}`,
 	pm25?:boolean | `@${string}`,
@@ -930,6 +939,7 @@ getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	star
 	so2Time?:boolean | `@${string}`,
 	o3?:boolean | `@${string}`,
 	o3Time?:boolean | `@${string}`,
+	time?:boolean | `@${string}`,
 		__typename?: boolean | `@${string}`
 }>;
 	["schema"]: AliasType<{
@@ -951,13 +961,15 @@ export type ModelTypes = {
 	["City"]: {
 		country: string,
 	name: string,
+	state: string,
 	location: ModelTypes["PureLocation"],
 	stationsInCity: Array<ModelTypes["Station"]>,
 	createdAt: string
 };
 	["Station"]: {
 		city: string,
-	stationId: number,
+	stationId?: number | undefined,
+	kind: ModelTypes["DATA_SOURCE_TYPE"],
 	createdAt: string,
 	updatedAt: string,
 	parameters: Array<ModelTypes["Parameters"]>
@@ -966,8 +978,10 @@ export type ModelTypes = {
 		lat: number,
 	long: number
 };
+	["DATA_SOURCE_TYPE"]:DATA_SOURCE_TYPE;
 	["Parameters"]: {
 		pm1?: number | undefined,
+	pm2p5?: number | undefined,
 	pm10?: number | undefined,
 	pm10Time?: string | undefined,
 	pm25?: number | undefined,
@@ -977,7 +991,8 @@ export type ModelTypes = {
 	so2?: number | undefined,
 	so2Time?: string | undefined,
 	o3?: number | undefined,
-	o3Time?: string | undefined
+	o3Time?: string | undefined,
+	time?: string | undefined
 };
 	["schema"]: {
 	query?: ModelTypes["Query"] | undefined,
@@ -1000,6 +1015,7 @@ export type GraphQLTypes = {
 	__typename: "City",
 	country: string,
 	name: string,
+	state: string,
 	location: GraphQLTypes["PureLocation"],
 	stationsInCity: Array<GraphQLTypes["Station"]>,
 	createdAt: string
@@ -1007,7 +1023,8 @@ export type GraphQLTypes = {
 	["Station"]: {
 	__typename: "Station",
 	city: string,
-	stationId: number,
+	stationId?: number | undefined,
+	kind: GraphQLTypes["DATA_SOURCE_TYPE"],
 	createdAt: string,
 	updatedAt: string,
 	parameters: Array<GraphQLTypes["Parameters"]>
@@ -1017,9 +1034,11 @@ export type GraphQLTypes = {
 	lat: number,
 	long: number
 };
+	["DATA_SOURCE_TYPE"]: DATA_SOURCE_TYPE;
 	["Parameters"]: {
 	__typename: "Parameters",
 	pm1?: number | undefined,
+	pm2p5?: number | undefined,
 	pm10?: number | undefined,
 	pm10Time?: string | undefined,
 	pm25?: number | undefined,
@@ -1029,9 +1048,16 @@ export type GraphQLTypes = {
 	so2?: number | undefined,
 	so2Time?: string | undefined,
 	o3?: number | undefined,
-	o3Time?: string | undefined
+	o3Time?: string | undefined,
+	time?: string | undefined
 }
     }
+export const enum DATA_SOURCE_TYPE {
+	OPEN_WEATHER = "OPEN_WEATHER",
+	MANUAL = "MANUAL",
+	AUTOMATIC = "AUTOMATIC"
+}
 
-
-type ZEUS_VARIABLES = {}
+type ZEUS_VARIABLES = {
+	["DATA_SOURCE_TYPE"]: ValueTypes["DATA_SOURCE_TYPE"];
+}

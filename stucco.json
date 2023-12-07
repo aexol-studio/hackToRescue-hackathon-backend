@@ -2,7 +2,7 @@
     "resolvers": {
         "Query.test": {
             "resolve": {
-                "name": "lib/Query/test"
+                "name": "lib\\Query\\test"
             }
         },
         "Query.getCityParameters": {

@@ -5,7 +5,8 @@ export const AllTypesProps: Record<string,any> = {
 		getCityParameters:{
 
 		}
-	}
+	},
+	DATA_SOURCE_TYPE: "enum" as const
 }
 
 export const ReturnTypes: Record<string,any> = {
@@ -20,6 +21,7 @@ export const ReturnTypes: Record<string,any> = {
 	City:{
 		country:"String",
 		name:"String",
+		state:"String",
 		location:"PureLocation",
 		stationsInCity:"Station",
 		createdAt:"String"
@@ -27,6 +29,7 @@ export const ReturnTypes: Record<string,any> = {
 	Station:{
 		city:"String",
 		stationId:"Int",
+		kind:"DATA_SOURCE_TYPE",
 		createdAt:"String",
 		updatedAt:"String",
 		parameters:"Parameters"
@@ -37,6 +40,7 @@ export const ReturnTypes: Record<string,any> = {
 	},
 	Parameters:{
 		pm1:"Float",
+		pm2p5:"Float",
 		pm10:"Float",
 		pm10Time:"String",
 		pm25:"Float",
@@ -46,7 +50,8 @@ export const ReturnTypes: Record<string,any> = {
 		so2:"Float",
 		so2Time:"String",
 		o3:"Float",
-		o3Time:"String"
+		o3Time:"String",
+		time:"String"
 	}
 }
 
