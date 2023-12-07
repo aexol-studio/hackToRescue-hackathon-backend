@@ -4,6 +4,7 @@ type Query{
 		stationId: Int
 		startDate: String
 		endDate: String
+		interval: Int
 	): [Station!]!
 	getRealTimeParameters(
 		stationId: Int!
@@ -18,7 +19,6 @@ type Query{
 	getIndexForCity(
 		city: String!
 		day: Int!
-		fromday: Int!
 	): Float!
 }
 

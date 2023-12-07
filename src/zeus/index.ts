@@ -840,12 +840,12 @@ type ZEUS_UNIONS = never
 
 export type ValueTypes = {
     ["Query"]: AliasType<{
-getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>},ValueTypes["Station"]],
+getCityParameters?: [{	city: string | Variable<any, string>,	stationId?: number | undefined | null | Variable<any, string>,	startDate?: string | undefined | null | Variable<any, string>,	endDate?: string | undefined | null | Variable<any, string>,	interval?: number | undefined | null | Variable<any, string>},ValueTypes["Station"]],
 getRealTimeParameters?: [{	stationId: number | Variable<any, string>},ValueTypes["Station"]],
 	getCollectedCities?:ValueTypes["City"],
 getRealTimeWeather?: [{	lat: number | Variable<any, string>,	long: number | Variable<any, string>,	city: string | Variable<any, string>},ValueTypes["Weather"]],
 	test?:boolean | `@${string}`,
-getIndexForCity?: [{	city: string | Variable<any, string>,	day: number | Variable<any, string>,	fromday: number | Variable<any, string>},boolean | `@${string}`],
+getIndexForCity?: [{	city: string | Variable<any, string>,	day: number | Variable<any, string>},boolean | `@${string}`],
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{
@@ -910,12 +910,12 @@ getIndexForCity?: [{	city: string | Variable<any, string>,	day: number | Variabl
 
 export type ResolverInputTypes = {
     ["Query"]: AliasType<{
-getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null},ResolverInputTypes["Station"]],
+getCityParameters?: [{	city: string,	stationId?: number | undefined | null,	startDate?: string | undefined | null,	endDate?: string | undefined | null,	interval?: number | undefined | null},ResolverInputTypes["Station"]],
 getRealTimeParameters?: [{	stationId: number},ResolverInputTypes["Station"]],
 	getCollectedCities?:ResolverInputTypes["City"],
 getRealTimeWeather?: [{	lat: number,	long: number,	city: string},ResolverInputTypes["Weather"]],
 	test?:boolean | `@${string}`,
-getIndexForCity?: [{	city: string,	day: number,	fromday: number},boolean | `@${string}`],
+getIndexForCity?: [{	city: string,	day: number},boolean | `@${string}`],
 		__typename?: boolean | `@${string}`
 }>;
 	["Mutation"]: AliasType<{

@@ -4,9 +4,6 @@ import { orm } from '../utils/orm.js';
 
 export const handler = async (input: FieldResolveInput) =>
   resolverFor('Query', 'getIndexForCity', async ({ city, day }) => {
-    if (day > 14) {
-      throw new Error('to much days captured');
-    }
     const o = await orm();
     let file = await o('file_stations').collection.findOne({ kind: DATA_SOURCE_TYPE.MANUAL, city });
     if (!file) {
@@ -24,18 +21,16 @@ export const handler = async (input: FieldResolveInput) =>
     if (!sortedParameters || sortedParameters.length < 1) {
       return [-1];
     }
-    console.log(sortedParameters);
-    const currentDate = new Date();
-
-    const slicedDays = sortedParameters.filter(
+    const fd = sortedParameters[0].time;
+    let slicedDays = sortedParameters.filter(
       (pd) =>
-        new Date(pd.time) > new Date(currentDate.getTime() - day * 60 * 60 * 60 * 1000) &&
-        new Date() > new Date(pd.time),
+        new Date(pd.time) > new Date(new Date(fd).getTime() - day * 60 * 60 * 60 * 1000) &&
+        new Date(fd) > new Date(pd.time),
     );
     const calculatePm10 =
       slicedDays.reduce((pv, c) => {
         if (c?.pm10) {
-          return pv + c.pm10 * 1;
+          pv += c.pm10 * 1;
         }
         return pv;
       }, 0.0) / slicedDays.length;
